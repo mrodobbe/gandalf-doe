@@ -57,10 +57,8 @@ class GP:
         if self.ard and self.lengthscale:
             if not self.normalize:
                 self.kernel.lengthscale = list(0.5 * (domain.min_values + domain.max_values))
-                print(list(0.5 * (domain.min_values + domain.max_values)))
             else:
                 self.kernel.lengthscale = list(0.5 * np.ones(len(domain.min_values)))
-                print(0.5 * np.ones(len(domain.min_values)))
         else:
             self.kernel.lengthscale = None
 
@@ -123,8 +121,6 @@ def select_uncertainty(pool, X, Y, lower_bound, upper_bound):
     kernel.lengthscale = list((lower_bound + upper_bound)/2)
     model.optimize(RProp(), messages=False)
     model.optimize(messages=False, max_iters=5000)
-    print(kernel.lengthscale)
-    print(kernel.variance)
     var = model.predict(pool)[1]
     return pool[np.argmax(var)]
 
@@ -135,8 +131,6 @@ def select_emoc(pool, X, Y, lower_bound, upper_bound):
     kernel.lengthscale = list((lower_bound + upper_bound)/2)
     model.optimize(RProp(max_iters=250), messages=False)
     model.optimize(messages=False, max_iters=5000)
-    print(kernel.lengthscale)
-    print(kernel.variance)
     sigma_n = model.Gaussian_noise[0]
     var = calc_emoc(pool, X, kernel, model, sigma_n)
     return pool[np.argmax(var)], kernel.lengthscale

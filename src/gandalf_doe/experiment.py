@@ -91,7 +91,6 @@ class Experiment:
 
         if not fixed_pool:
             self.pool.initialize_pool(pool_size=self.f * n)
-            print(self.pool.dimension)
 
         if self.run < self.al_steps:
             self.pool.add_experiments(x[-new_experiments:])
@@ -139,7 +138,6 @@ class Experiment:
                 try:
                     x_new, self.length_scale = s.select_emoc(x, y)
                 except:
-                    print(s.pool)
                     raise
             elif self.mode == 'center':
                 x_new = s.select_center(cluster, query_cluster)
@@ -171,29 +169,29 @@ class Experiment:
 
             print(f"The selected cluster has {len(s.pool)} points")
 
-            same_catalyst = np.where((s.pool[:, 0] != x_new[0]) &
-                                     (s.pool[:, 1] != x_new[1]) &
-                                     (s.pool[:, 2] != x_new[2]) &
-                                     (s.pool[:, 3] == x_new[3]) &
-                                     (s.pool[:, 4] == x_new[4]) &
-                                     (s.pool[:, 5] == x_new[5]) &
-                                     (s.pool[:, 6] == x_new[6]))[0]
+            same_conditions = np.where((s.pool[:, 0] != x_new[0]) &
+                                       (s.pool[:, 1] != x_new[1]) &
+                                       (s.pool[:, 2] != x_new[2]) &
+                                       (s.pool[:, 3] == x_new[3]) &
+                                       (s.pool[:, 4] == x_new[4]) &
+                                       (s.pool[:, 5] == x_new[5]) &
+                                       (s.pool[:, 6] == x_new[6]))[0]
 
-            if len(same_catalyst) == 0:
-                print("No similar catalysts in the selected pool")
+            if len(same_conditions) == 0:
+                print("No similar conditions in the selected pool")
                 pass
 
-            elif len(same_catalyst) < n_conditions + 1:
-                print(f"There are {len(same_catalyst)} similar catalysts in the selected pool")
-                for value in same_catalyst:
+            elif len(same_conditions) < n_conditions + 1:
+                print(f"There are {len(same_conditions)} similar conditions in the selected pool")
+                for value in same_conditions:
                     cat = s.pool[value]
                     new_index = new_index + 1
                     previous.loc[new_index] = list(cat) + list(y_new)
 
             else:
-                print(f"There are {len(same_catalyst)} similar catalysts in the selected pool")
+                print(f"There are {len(same_conditions)} similar conditions in the selected pool")
                 variances = []
-                for value in same_catalyst:
+                for value in same_conditions:
                     cat = s.pool[value]
                     variance = self.predict_outcome(cat, measured)["var"]
                     variances.append(variance)
@@ -279,7 +277,6 @@ class Experiment:
 
         if not fixed_pool:
             self.pool.initialize_pool(pool_size=self.f * n)
-            print(self.pool.dimension)
 
         self.pool.add_experiments(x[-new_experiments:])
 
@@ -327,7 +324,6 @@ class Experiment:
                     try:
                         x_new, self.length_scale = s.select_emoc(x, y)
                     except:
-                        print(s.pool)
                         raise
                 elif self.mode == 'center':
                     x_new = s.select_center(cluster, query_cluster)
@@ -405,14 +401,14 @@ class Experiment:
                             cats = np.delete(cats, same_condition, axis=0)
 
                 elif len(same_cluster) < n_conditions + 1:
-                    print(f"There are {len(same_cluster)} similar catalysts in the selected pool")
+                    print(f"There are {len(same_cluster)} similar conditions in the selected pool")
                     for value in same_cluster:
                         cat = s.pool[value]
                         new_index = new_index + 1
                         previous.loc[new_index] = list(cat) + list(y_new)
 
                 else:
-                    print(f"There are {len(same_cluster)} similar catalysts in the selected pool")
+                    print(f"There are {len(same_cluster)} similar conditions in the selected pool")
                     variances = []
                     distances = []
                     weights = []

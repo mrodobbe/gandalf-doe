@@ -45,7 +45,7 @@ class Domain:
         self.min_values: Union[List[Any], NDArray[Any]] = []
         self.max_values: Union[List[Any], NDArray[Any]] = []
 
-    def add_variable(self, variable: Union[List[Variable], Variable]) -> None:
+    def add_variable(self, variable: List[Variable]) -> None:
         self.variables += variable
 
     def add_constraint(self, constraint: Union[List[Constraint], Constraint]) -> None:

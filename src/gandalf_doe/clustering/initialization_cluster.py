@@ -6,7 +6,6 @@ import numpy as np
 
 def initialization_cluster(space, N, n_init, lower_bound, upper_bound, objective=None, normalize=True, scale=False):
     pool = initial_design('random', space, N)
-    print(f"Initial shape: {pool.shape}")
     if normalize:
         pool = normalizer(pool, lower_bound, upper_bound)
     elif scale:

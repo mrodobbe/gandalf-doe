@@ -78,7 +78,6 @@ def draw_cluster_from_pool(pool: Pool, n: int):
 
     while query_cluster == 0:
         cluster = KMeans(n_clusters=n + 1).fit(pool.pool)
-        print(cluster)
         new_cluster = select_clusters(cluster, n)
         query_cluster = largest_empty_cluster(new_cluster)
 
@@ -91,7 +90,6 @@ def draw_multiple_clusters_from_pool(pool: Pool, n_cluster: int, n: int):
     query_clusters = [0, 0, 0]
 
     cluster = KMeans(n_clusters=n_cluster + 1).fit(pool.pool)
-    print("cluster", cluster)
     new_cluster = select_clusters(cluster, n_cluster)
     query_clusters = get_multiple_clusters(new_cluster, n)
 

@@ -3,7 +3,9 @@ This repository contains the source code of the Gaussian n-dimensional Active Le
 The original version of GandALF is described [in this paper](https://doi.org/10.1016/j.fuel.2022.125340).
 
 ## 🔨 Installation
-GandALF is built upon NumPy, Pandas, and GPyOpt. 
+GandALF is built upon NumPy, Pandas, and GPyOpt. Because of the strong dependency on GPy and GPyOpt, 
+it is recommended to use python version 3.7. A stable release for newer python versions 
+will be made available in a future update. <br>
 The package can be installed using pip:
 
 Install a virtual environment in Anaconda:

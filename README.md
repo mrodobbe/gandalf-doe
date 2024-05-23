@@ -1,8 +1,8 @@
-# GandALF
+# 🧙‍♂️ GandALF
 This repository contains the source code of the Gaussian n-dimensional Active Learning Framework (GandALF).
 The original version of GandALF is described [in this paper](https://doi.org/10.1016/j.fuel.2022.125340).
 
-## Installation
+## 🔨 Installation
 GandALF is built upon NumPy, Pandas, and GPyOpt. 
 The package can be installed using pip:
 
@@ -17,8 +17,8 @@ git clone https://github.com/mrodobbe/gandalf-doe.git
 cd gandalf-doe
 pip install .
 ```
-## How to use the code?
-*check demo*
+## 👩🏽‍🔬 How to use the code?
+An instruction on how to use GandALF is given in `notebooks/demo.ipynb`.
 
-## Citation
+## 🧾 Citation
 *add references*
